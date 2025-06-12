@@ -22,11 +22,32 @@ public class Result {
     private String message;
     private Integer code;
     private Object data;
+    private String msg;
 
     public Result(ResultCode code) {
         this.success = code.isSuccess();
         this.code = code.getCode();
         this.message = code.getMessage();
+    }
+
+    public Result(ResultCode code, String message) {
+        this.success = code.isSuccess();
+        this.code = code.getCode();
+        this.message = message;
+    }
+
+    public Result(ResultCode code, Object data) {
+        this.success = code.isSuccess();
+        this.code = code.getCode();
+        this.message = code.getMessage();
+        this.data = data;
+    }
+
+    public Result(int code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.success = (code == 200 || code == 1000); // 或按你自定义规则
     }
 
     public static Result success() {
@@ -39,6 +60,10 @@ public class Result {
 
     public static Result success(String msg) {
         return new Result(ResultCode.COMMON_SUCCESS, msg);
+    }
+
+    public static Result success(int code, String msg) {
+        return new Result(code, msg, null);
     }
 
     public static Result alert(ResultCode code) {
@@ -61,7 +86,6 @@ public class Result {
         return result;
     }
 
-
     public static Result fail() {
         return new Result(ResultCode.COMMON_FAIL);
     }
@@ -73,26 +97,6 @@ public class Result {
     public static Result fail(String msg, Exception e) {
         log.error(e.getMessage(), e);
         return new Result(ResultCode.COMMON_FAIL, msg);
-    }
-
-
-    /**
-     * 统一返回码，信息自定义
-     *
-     * @param code
-     * @param message
-     */
-    public Result(ResultCode code, String message) {
-        this.success = code.isSuccess();
-        this.code = code.getCode();
-        this.message = message;
-    }
-
-    public Result(ResultCode code, Object object) {
-        this.success = code.isSuccess();
-        this.code = code.getCode();
-        this.message = code.getMessage();
-        this.data = object;
     }
 
 }

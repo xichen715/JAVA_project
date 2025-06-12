@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xichen.tourism.mapper.UserMapper">
-    <select id="getUserPage" resultType="user">
+    <select id="getUserPage" resultType="com.xichen.tourism.domain.User">
         select
-            u.*
+        u.*
         from user u
         <where>
             1=1

@@ -50,6 +50,19 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 992240715@qq.com
+    password: ssshjhfxlrhqbfbf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    default-encoding: UTF-8
   # redis 配置
   redis:
     # 地址

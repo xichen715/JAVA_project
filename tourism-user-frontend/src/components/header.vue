@@ -15,7 +15,14 @@
         </div>
       </div>
       <div class="header-actions">
-        <div class="action-btn" @click="toCenter">个人中心</div>
+        <div class="user-info" @click="toCenter">
+          <el-avatar
+              :src="userAvatar"
+              size="small"
+              class="avatar"
+          />
+          <span class="username">{{ userName }}</span>
+        </div>
         <div class="action-btn" @click="loginOut">退出</div>
       </div>
     </div>
@@ -23,6 +30,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -38,6 +46,19 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState(['HOST', 'userInfo']),
+    userName() {
+      return this.userInfo?.userName || "未登录";
+    },
+    userAvatar() {
+      if (this.userInfo?.avatar) {
+        // 每次渲染都带上时间戳，防止缓存
+        return this.HOST + this.userInfo.avatar + '?t=' + Date.now();
+      }
+      return require('@/assets/image/image2.png');
+    }
+  },
   methods: {
     toCenter() {
       this.$router.push("/center");
@@ -52,8 +73,6 @@ export default {
     },
     loginOut() {
       this.$store.dispatch("logout").then(() => {
-        window.localStorage.removeItem("user_info");
-        window.localStorage.removeItem("user_token");
         this.$message({
           message: "退出账号成功！",
           type: "success"
@@ -92,7 +111,7 @@ export default {
   margin-right: 32px;
 }
 .header-logo img {
-  height: 76px;  /* 调大这里的高度 */
+  height: 76px;
   display: block;
 }
 .header-menu {
@@ -122,6 +141,31 @@ export default {
   align-items: center;
   gap: 12px;
   margin-left: 32px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 16px 0 0;
+  border-radius: 18px;
+  transition: background 0.2s;
+  margin-right: 4px;
+}
+.user-info:hover {
+  background: #f5f7fa;
+}
+.avatar {
+  margin-right: 8px;
+  background: #c0c4cc;
+}
+.username {
+  font-size: 16px;
+  color: #3571d8;
+  font-weight: 500;
+  max-width: 120px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .action-btn {
   width: 90px;

@@ -6,15 +6,14 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xichen.tourism.domain.*;
-import com.xichen.tourism.domain.*;
 import com.xichen.tourism.enums.ResultCode;
-import com.xichen.tourism.service.*;
 import com.xichen.tourism.service.*;
 import com.xichen.tourism.utils.PasswordUtils;
 import com.xichen.tourism.utils.RedisUtils;
 import com.xichen.tourism.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +48,11 @@ public class UserController {
     private SysFavorService sysFavorService;
     @Autowired
     private SysHotelOrderService sysHotelOrderService;
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
 
     /** 分页查询用户 */
     @PostMapping("getUserPage")
@@ -60,7 +64,7 @@ public class UserController {
     @GetMapping("getUserCount")
     public Result getUserCount() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(User::getUserType,1);
+        queryWrapper.lambda().eq(User::getUserType, 1);
         int count = userService.count(queryWrapper);
         return Result.success(count);
     }
@@ -76,13 +80,12 @@ public class UserController {
     @Transactional(rollbackFor = Exception.class)
     @PostMapping("saveUser")
     public Result saveUser(@RequestBody User user) {
-        //先校验登陆账号是否重复
-        boolean account = checkAccount(user);
-        if (!account) {
+        // 先校验登陆账号是否重复
+        if (!checkAccount(user)) {
             return Result.fail("登陆账号已存在不可重复！");
         }
         String uuid = IdWorker.get32UUID();
-        //密码加盐加密
+        // 密码加盐加密
         String encrypt = PasswordUtils.encrypt(user.getPassword());
         String[] split = encrypt.split("\\$");
         user.setId(uuid);
@@ -90,7 +93,7 @@ public class UserController {
         user.setSalt(split[1]);
         user.setAvatar("/img/1697436716646531073.jpeg");
         user.setPwdUpdateDate(new Date());
-        //保存用户
+        // 保存用户
         boolean save = userService.save(user);
         return Result.success();
     }
@@ -101,13 +104,12 @@ public class UserController {
     public Result editUser(@RequestBody User user) {
         User user1 = userService.getById(user.getId());
         if (!user1.getLoginAccount().equals(user.getLoginAccount())) {
-            //先校验登陆账号是否重复
-            boolean account = checkAccount(user);
-            if (!account) {
+            // 先校验登陆账号是否重复
+            if (!checkAccount(user)) {
                 return Result.fail("登陆账号已存在不可重复！");
             }
         }
-        //更新用户
+        // 更新用户
         boolean edit = userService.updateById(user);
         return Result.success();
     }
@@ -115,7 +117,7 @@ public class UserController {
     /** 校验用户 */
     public boolean checkAccount(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(User::getLoginAccount,user.getLoginAccount());
+        queryWrapper.lambda().eq(User::getLoginAccount, user.getLoginAccount());
         int count = userService.count(queryWrapper);
         return count <= 0;
     }
@@ -123,23 +125,27 @@ public class UserController {
     /** 删除用户 */
     @Transactional(rollbackFor = Exception.class)
     @GetMapping("removeUser")
-    public Result removeUser(@RequestParam("ids")String ids) {
+    public Result removeUser(@RequestParam("ids") String ids) {
         if (StringUtils.isNotBlank(ids)) {
             String[] asList = ids.split(",");
             for (String id : asList) {
-                User user = userService.getById(id);
-                boolean remove = userService.removeById(id);
+                // 删除用户
+                userService.removeById(id);
+                // 删除相关订单、评论、收藏、酒店订单
                 QueryWrapper<SysAttractionOrder> queryWrapper = new QueryWrapper<>();
-                queryWrapper.lambda().eq(SysAttractionOrder::getUserId,id);
+                queryWrapper.lambda().eq(SysAttractionOrder::getUserId, id);
                 sysAttractionOrderService.remove(queryWrapper);
+
                 QueryWrapper<SysComments> wrapper = new QueryWrapper<>();
-                wrapper.lambda().eq(SysComments::getUserId,id);
+                wrapper.lambda().eq(SysComments::getUserId, id);
                 sysCommentsService.remove(wrapper);
+
                 QueryWrapper<SysFavor> queryWrapper1 = new QueryWrapper<>();
-                queryWrapper1.lambda().eq(SysFavor::getUserId,id);
+                queryWrapper1.lambda().eq(SysFavor::getUserId, id);
                 sysFavorService.remove(queryWrapper1);
+
                 QueryWrapper<SysHotelOrder> queryWrapper2 = new QueryWrapper<>();
-                queryWrapper2.lambda().eq(SysHotelOrder::getUserId,id);
+                queryWrapper2.lambda().eq(SysHotelOrder::getUserId, id);
                 sysHotelOrderService.remove(queryWrapper2);
             }
             return Result.success();
@@ -191,37 +197,41 @@ public class UserController {
     /** 修改个人头像 */
     @PostMapping("setUserAvatar/{id}")
     public Result setUserAvatar(@PathVariable("id") String id, @RequestParam("file") MultipartFile avatar) {
-        if(StringUtils.isBlank(id)){
+        if (StringUtils.isBlank(id)) {
             return Result.fail("用户id为空!");
         }
         User apeUser = userService.getById(id);
-        if(avatar.isEmpty()){
+        if (avatar.isEmpty()) {
             return Result.fail("上传的头像不能为空!");
         }
         String coverType = avatar.getOriginalFilename().substring(avatar.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
-        if ("jpeg".equals(coverType)  || "gif".equals(coverType) || "png".equals(coverType) || "bmp".equals(coverType)  || "jpg".equals(coverType)) {
-            //文件路径
-            String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"img";
-            //文件名=当前时间到毫秒+原来的文件名
-            String fileName = System.currentTimeMillis() + "."+ coverType;
-            //如果文件路径不存在，新增该路径
+        if ("jpeg".equals(coverType) || "gif".equals(coverType) || "png".equals(coverType)
+                || "bmp".equals(coverType) || "jpg".equals(coverType)) {
+            // 文件路径
+            String filePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "img";
+            // 文件名=当前时间到毫秒+原来的文件名
+            String fileName = System.currentTimeMillis() + "." + coverType;
+            // 如果文件路径不存在，新增该路径
             File file1 = new File(filePath);
-            if(!file1.exists()){
-                boolean mkdir = file1.mkdir();
+            if (!file1.exists()) {
+                file1.mkdir();
             }
-            //现在的文件地址
+            // 现在的文件地址
             if (StringUtils.isNotBlank(apeUser.getAvatar())) {
-                String s = apeUser.getAvatar().split("/")[2];
-                File now = new File(filePath + System.getProperty("file.separator") + s);
-                boolean delete = now.delete();
+                String[] split = apeUser.getAvatar().split("/");
+                if (split.length > 2) {
+                    String s = split[2];
+                    File now = new File(filePath + System.getProperty("file.separator") + s);
+                    now.delete();
+                }
             }
-            //实际的文件地址
+            // 实际的文件地址
             File dest = new File(filePath + System.getProperty("file.separator") + fileName);
-            //存储到数据库里的相对文件地址
-            String storeImgPath = "/img/"+fileName;
+            // 存储到数据库里的相对文件地址
+            String storeImgPath = "/img/" + fileName;
             try {
                 avatar.transferTo(dest);
-                //更新头像
+                // 更新头像
                 apeUser.setAvatar(storeImgPath);
                 userService.updateById(apeUser);
                 return Result.success(storeImgPath);
@@ -233,6 +243,7 @@ public class UserController {
         }
     }
 
+    /** 修改密码 */
     @PostMapping("changePassword")
     public Result changePassword(@RequestBody JSONObject json) {
         String id = json.getString("id");
@@ -257,62 +268,72 @@ public class UserController {
         }
     }
 
+    /**
+     * 发送邮箱验证码（找回密码用）
+     */
     @GetMapping("getEmailReg")
     public Result getEmailReg(@RequestParam("email") String email) {
-        String str="abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ0123456789";
-        Random r=new Random();
-        String arr[]=new String [4];
-        String reg="";
-        for(int i=0;i<4;i++) {
-            int n=r.nextInt(62);
-            arr[i]=str.substring(n,n+1);
-            reg+=arr[i];
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random r = new Random();
+        StringBuilder reg = new StringBuilder();
+        for (int i = 0; i < 6; i++) { // 推荐6位
+            int n = r.nextInt(str.length());
+            reg.append(str.charAt(n));
         }
         try {
-            redisUtils.set(email + "forget",reg.toLowerCase(),60L);
-            JavaMailSenderImpl sender = new JavaMailSenderImpl();
-            sender.setPort(25);
-            sender.setHost("smtp.qq.com");
-            sender.setUsername("1760272627@qq.com");
-            sender.setPassword("nwavnzopbtpibchc");
-            sender.setDefaultEncoding("utf-8");
-            MimeMessage msg = sender.createMimeMessage();
+            // 存入Redis，60秒有效
+            redisUtils.set(email + "forget", reg.toString().toLowerCase(), 60L);
+
+            // 发送邮件
+            MimeMessage msg = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-            helper.setFrom(sender.getUsername());
+            helper.setFrom(fromEmail); // 用配置文件里的发件人
             helper.setTo(email);
             helper.setSubject("旅游信息推荐系统修改密码验证");
-            helper.setText("您的邮箱验证码为："+reg,true);
-            sender.send(msg);
-        }catch (Exception e){
-            Result.fail("邮件发送失败");
+            helper.setText("您的邮箱验证码为：" + reg, true);
+            mailSender.send(msg);
+
+            return Result.success(100, "验证码已发送");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail("邮件发送失败: " + e.getMessage());
         }
-        return Result.success();
     }
 
+    /**
+     * 找回密码（通过邮箱验证码）
+     */
     @PostMapping("forgetPassword")
     public Result forgetPassword(@RequestBody JSONObject jsonObject) {
         String loginAccount = jsonObject.getString("loginAccount");
         String email = jsonObject.getString("email");
         String password = jsonObject.getString("password");
         String code = jsonObject.getString("code").toLowerCase();
+
         String s = redisUtils.get(email + "forget");
-        if (!code.equals(s)) {
-            return Result.fail("验证码错误");
+        if (s == null || !code.equals(s)) {
+            return Result.fail("验证码错误或已过期");
         }
+
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(User::getLoginAccount,loginAccount).last("limit 1");
+        queryWrapper.lambda().eq(User::getLoginAccount, loginAccount).last("limit 1");
         User user = userService.getOne(queryWrapper);
-        //密码加盐加密
+
+        if (user == null) {
+            return Result.fail("用户不存在");
+        }
+
+        // 密码加盐加密
         String encrypt = PasswordUtils.encrypt(password);
         String[] split = encrypt.split("\\$");
         user.setPassword(split[0]);
         user.setSalt(split[1]);
         boolean update = userService.updateById(user);
+
         if (update) {
-            return Result.success();
+            return Result.success(1000, "密码修改成功");
         } else {
             return Result.fail("密码修改失败");
         }
     }
-
 }
