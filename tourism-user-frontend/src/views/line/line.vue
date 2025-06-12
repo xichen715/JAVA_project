@@ -84,5 +84,55 @@
 </script>
 
 <style scoped>
-   @import url('../../assets/css/line.css');
+.line {
+  width: 100%;
+  min-height: 100vh;
+  font-family: '黑体', 'Arial', sans-serif;
+  background: #f7f7f7;
+}
+.line1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.line2 {
+  margin-top: 20px;
+  width: 80%;
+  height: 80px;
+  background-color: #F3F3F5;
+  display: flex;
+  align-items: center;
+}
+.line3 {
+  width: 80%;
+}
+.line4 {
+  background-color: #F3F3F5;
+  margin-top: 15px;
+  width: 100%;
+  height: 240px;
+  display: flex;
+}
+.line5 {
+  width: 30%;
+  height: 100%;
+}
+.line6 {
+  width: 70%;
+  height: 100%;
+}
+.line7 {
+  margin-top: 10px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.line8 {
+  line-height: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 200px;
+  overflow: hidden;
+  letter-spacing: 2px;
+}
 </style>

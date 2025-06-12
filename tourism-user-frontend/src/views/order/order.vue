@@ -254,10 +254,28 @@
 </script>
 
 <style scoped>
-   @import url('../../assets/css/attractions.css');
-   .order {
-       width: 100%;
-       display: flex;
-       justify-content: center;
-   }
+.attractions {
+  width: 100%;
+  height: 100%;
+  font-family: '黑体';
+}
+.attractions1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attractions3 {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.order {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 </style>

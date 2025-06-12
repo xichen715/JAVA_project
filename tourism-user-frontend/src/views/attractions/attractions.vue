@@ -83,7 +83,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   font-family: '黑体', 'Arial', sans-serif;
-  background: #f6f8fb;  /* 这里和hotel页面一样 */
+  background: #f7f7f7;
 }
 .attractions1 {
   width: 100%;
@@ -96,7 +96,7 @@ export default {
   width: 80%;
   min-width: 300px;
   height: 80px;
-  background-color: #F3F3F5;
+  background-color: #fff;
   display: flex;
   align-items: center;
   border-radius: 16px;
@@ -158,7 +158,12 @@ export default {
   -webkit-box-orient: vertical;
 }
 .attraction-action {
-  margin-top: 8px;
+  margin-left: 35px; /* 让按钮和内容有空隙 */
+  margin-right:10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 120px; /* 可根据需要调整 */
 }
 .el-pagination {
   margin: 30px 0 18px 0;

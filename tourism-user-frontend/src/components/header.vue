@@ -37,9 +37,9 @@ export default {
       menuList: [
         { name: "index", label: "主页", path: "/" },
         { name: "attractions", label: "景点", path: "/attractions" },
-        { name: "line", label: "行程规划", path: "/line" },
-        { name: "hotel", label: "订酒店", path: "/hotel" },
+        { name: "hotel", label: "酒店", path: "/hotel" },
         { name: "forum", label: "游记", path: "/forum" },
+        { name: "line", label: "规划我的旅行", path: "/line" },
         { name: "favor", label: "我的收藏", path: "/favor" },
         { name: "order", label: "我的预定", path: "/order" },
         { name: "manage", label: "后台管理", path: "/manage" }
