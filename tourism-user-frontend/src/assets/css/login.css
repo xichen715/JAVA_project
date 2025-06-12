@@ -1,0 +1,107 @@
+.login {
+    width: 100vw;
+    height: 100vh;
+    min-height: 500px;
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    display: flex;
+    background: #f6f8fb;
+}
+
+.login1 {
+    width: 60vw;
+    height: 100vh;
+    background-image: url('../image/image 2.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login1::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%; height: 100%;
+    left: 0; top: 0;
+    background: rgba(62,120,243,0.18);
+    backdrop-filter: blur(1px);
+    z-index: 1;
+}
+.login4 {
+    width: 40vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6f8fb;
+}
+.login5 {
+    z-index: 2;
+    width: 380px;
+    min-height: 420px;
+    background: #fff;
+    box-shadow: 0 8px 32px 0 rgba(62,120,243,0.09);
+    border-radius: 20px;
+    padding: 44px 36px 32px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login6 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    color: #3E78F3;
+}
+.el-input {
+    width: 100%;
+    margin-bottom: 22px;
+}
+.login7 {
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    color: #3E78F3;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.login7:hover {
+    text-decoration: underline;
+}
+.login8 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 22px;
+    background: linear-gradient(90deg, #3E78F3 60%, #55adff 100%);
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
+    transition: background 0.2s;
+}
+.login8:hover {
+    background: linear-gradient(90deg, #2863e6 60%, #2897e6 100%);
+    box-shadow: 0 2px 12px 0 rgba(62,120,243,0.12);
+}
+.login8:last-of-type {
+    background: #fff;
+    color: #3E78F3;
+    border: 1.5px solid #3E78F3;
+    margin-bottom: 0;
+}
+.login8:last-of-type:hover {
+    background: #e4edff;
+    color: #2863e6;
+}
+@media (max-width: 900px) {
+    .login1 { display: none; }
+    .login4 { width: 100vw; }
+}

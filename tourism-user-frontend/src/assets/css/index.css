@@ -1,0 +1,139 @@
+.index {
+    background: #f8f9fb;
+    min-height: 100vh;
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+}
+.el-carousel {
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 30px auto 40px;
+    width: 90%;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
+}
+.index1 {
+    width: 90%;
+    margin: 0 auto 40px;
+}
+.index2 {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.06);
+    padding: 36px 30px 30px 30px;
+    margin-bottom: 40px;
+}
+.index3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+.index4 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start;
+}
+.index5 {
+    background: #f8f8fb;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.03);
+    width: 260px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.index5:hover {
+    box-shadow: 0 6px 24px 0 rgba(67,129,255,0.12);
+}
+.index5 img {
+    border-radius: 14px 14px 0 0;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+.index6 {
+    padding: 18px 16px 10px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.index7 {
+    font-size: 19px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+.index8 {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 12px;
+    min-height: 36px;
+    line-height: 1.5;
+}
+.index9 {
+    margin: 0 auto 12px auto;
+    width: 80%;
+    background: #4381FF;
+    color: #fff;
+    border-radius: 16px;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.index9:hover {
+    background: #2763d8;
+}
+.el-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.index11 {
+    width: 90%;
+    margin: 0 auto 40px;
+    text-align: right;
+    font-size: 17px;
+    color: #4381FF;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+@media (max-width: 900px) {
+    .index4 {
+        gap: 20px;
+    }
+    .index5 {
+        width: 47%;
+        min-width: 180px;
+    }
+    .index1, .el-carousel, .index11 {
+        width: 99%;
+    }
+}
+@media (max-width: 600px) {
+    .index4 {
+        flex-direction: column;
+        gap: 14px;
+    }
+    .index5 {
+        width: 98%;
+    }
+    .index2 {
+        padding: 10px 5px;
+    }
+    .index3 {
+        font-size: 22px;
+    }
+}
+
+.btn-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
