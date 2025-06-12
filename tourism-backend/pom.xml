@@ -153,7 +153,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.shanzhu.tourism.BackendApplication</mainClass>
+                    <mainClass>com.xichen.tourism.BackendApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

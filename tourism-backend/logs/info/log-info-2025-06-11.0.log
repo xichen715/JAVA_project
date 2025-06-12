@@ -1,5 +1,5 @@
-2025-06-11 22:41:59.938 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - Starting BackendApplication using Java 18.0.2.1 on LAPTOP-QDS31QG8 with PID 8152 (D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend\target\classes started by user in D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend)
-2025-06-11 22:41:59.941 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - The following profiles are active: dev
+2025-06-11 22:41:59.938 [restartedMain] INFO  com.xichen.tourism.BackendApplication - Starting BackendApplication using Java 18.0.2.1 on LAPTOP-QDS31QG8 with PID 8152 (D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend\target\classes started by user in D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend)
+2025-06-11 22:41:59.941 [restartedMain] INFO  com.xichen.tourism.BackendApplication - The following profiles are active: dev
 2025-06-11 22:41:59.989 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2025-06-11 22:41:59.989 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
 2025-06-11 22:42:00.509 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -15,8 +15,8 @@
 2025-06-11 22:42:01.351 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
 
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2025-06-11 22:51:59.877 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - Starting BackendApplication using Java 18.0.2.1 on LAPTOP-QDS31QG8 with PID 6060 (D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend\target\classes started by user in D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend)
-2025-06-11 22:51:59.879 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - The following profiles are active: dev
+2025-06-11 22:51:59.877 [restartedMain] INFO  com.xichen.tourism.BackendApplication - Starting BackendApplication using Java 18.0.2.1 on LAPTOP-QDS31QG8 with PID 6060 (D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend\target\classes started by user in D:\浏览器下载\006-旅游推荐系统-新版\006-旅游推荐管理系统\tourism-backend)
+2025-06-11 22:51:59.879 [restartedMain] INFO  com.xichen.tourism.BackendApplication - The following profiles are active: dev
 2025-06-11 22:51:59.918 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2025-06-11 22:51:59.918 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
 2025-06-11 22:52:00.313 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -34,13 +34,13 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 2025-06-11 22:52:02.177 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
 2025-06-11 22:52:02.196 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
 2025-06-11 22:52:02.214 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2025-06-11 22:52:02.220 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - Started BackendApplication in 2.622 seconds (JVM running for 3.114)
-2025-06-11 22:52:02.222 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - =====================项目后端启动成功============================
+2025-06-11 22:52:02.220 [restartedMain] INFO  com.xichen.tourism.BackendApplication - Started BackendApplication in 2.622 seconds (JVM running for 3.114)
+2025-06-11 22:52:02.222 [restartedMain] INFO  com.xichen.tourism.BackendApplication - =====================项目后端启动成功============================
 2025-06-11 23:11:56.525 [http-nio-8080-exec-3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-06-11 23:11:56.529 [http-nio-8080-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-06-11 23:11:56.537 [http-nio-8080-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 8 ms
-2025-06-11 23:11:57.367 [http-nio-8080-exec-3] INFO  com.shanzhu.tourism.handle.MyMetaObjectHandler - 公共字段自动填充[insert]...
-2025-06-11 23:12:32.791 [http-nio-8080-exec-39] INFO  com.shanzhu.tourism.handle.MyMetaObjectHandler - 公共字段自动填充[update]...
-2025-06-11 23:12:40.296 [http-nio-8080-exec-44] INFO  com.shanzhu.tourism.handle.MyMetaObjectHandler - 公共字段自动填充[update]...
-2025-06-11 23:13:13.059 [http-nio-8080-exec-52] INFO  com.shanzhu.tourism.handle.MyMetaObjectHandler - 公共字段自动填充[update]...
-2025-06-11 23:13:25.208 [http-nio-8080-exec-54] INFO  com.shanzhu.tourism.handle.MyMetaObjectHandler - 公共字段自动填充[update]...
+2025-06-11 23:11:57.367 [http-nio-8080-exec-3] INFO  handle.com.xichen.tourism.MyMetaObjectHandler - 公共字段自动填充[insert]...
+2025-06-11 23:12:32.791 [http-nio-8080-exec-39] INFO  handle.com.xichen.tourism.MyMetaObjectHandler - 公共字段自动填充[update]...
+2025-06-11 23:12:40.296 [http-nio-8080-exec-44] INFO  handle.com.xichen.tourism.MyMetaObjectHandler - 公共字段自动填充[update]...
+2025-06-11 23:13:13.059 [http-nio-8080-exec-52] INFO  handle.com.xichen.tourism.MyMetaObjectHandler - 公共字段自动填充[update]...
+2025-06-11 23:13:25.208 [http-nio-8080-exec-54] INFO  handle.com.xichen.tourism.MyMetaObjectHandler - 公共字段自动填充[update]...

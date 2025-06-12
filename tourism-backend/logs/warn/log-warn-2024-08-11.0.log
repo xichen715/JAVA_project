@@ -4,7 +4,7 @@
 2024-08-11 10:32:52.589 [http-nio-8080-exec-87] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.NullPointerException: element cannot be mapped to a null key]
 2024-08-11 10:33:16.961 [http-nio-8080-exec-18] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.NullPointerException: element cannot be mapped to a null key]
 2024-08-11 10:34:00.575 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.NullPointerException: element cannot be mapped to a null key]
-2024-08-11 10:38:15.990 [http-nio-8080-exec-15] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler com.shanzhu.tourism.handle.GlobalExceptionHandler#handleRuntimeException(RuntimeException)
+2024-08-11 10:38:15.990 [http-nio-8080-exec-15] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler handle.com.xichen.tourism.GlobalExceptionHandler#handleRuntimeException(RuntimeException)
 org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
 	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:309)
 	at org.apache.catalina.connector.OutputBuffer.flush(OutputBuffer.java:272)
@@ -92,7 +92,7 @@ Caused by: java.io.IOException: Broken pipe
 	at org.apache.coyote.Response.action(Response.java:209)
 	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:305)
 	... 64 common frames omitted
-2024-08-11 10:38:15.990 [http-nio-8080-exec-17] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler com.shanzhu.tourism.handle.GlobalExceptionHandler#handleException(Exception)
+2024-08-11 10:38:15.990 [http-nio-8080-exec-17] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler handle.com.xichen.tourism.GlobalExceptionHandler#handleException(Exception)
 org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
 	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:351)
 	at org.apache.catalina.connector.OutputBuffer.flushByteBuffer(OutputBuffer.java:776)

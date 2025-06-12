@@ -1,5 +1,5 @@
-2024-08-10 16:53:28.641 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - Starting TravelApplication using Java 1.8.0_332 on bianJWdeMacBook-Pro.local with PID 84813 (/Users/jiawang/saleProject/旅游推荐管理系统v2/tourism-backend/target/classes started by jiawang in /Users/jiawang/saleProject/旅游推荐管理系统v2/tourism-backend)
-2024-08-10 16:53:28.645 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - The following profiles are active: dev
+2024-08-10 16:53:28.641 [restartedMain] INFO  com.xichen.tourism.BackendApplication - Starting TravelApplication using Java 1.8.0_332 on bianJWdeMacBook-Pro.local with PID 84813 (/Users/jiawang/saleProject/旅游推荐管理系统v2/tourism-backend/target/classes started by jiawang in /Users/jiawang/saleProject/旅游推荐管理系统v2/tourism-backend)
+2024-08-10 16:53:28.645 [restartedMain] INFO  com.xichen.tourism.BackendApplication - The following profiles are active: dev
 2024-08-10 16:53:28.680 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2024-08-10 16:53:28.680 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
 2024-08-10 16:53:29.044 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -17,7 +17,7 @@
 2024-08-10 16:53:30.695 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
 2024-08-10 16:53:30.723 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
 2024-08-10 16:53:30.740 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2024-08-10 16:53:30.747 [restartedMain] INFO  com.shanzhu.tourism.BackendApplication - Started TravelApplication in 2.429 seconds (JVM running for 2.752)
+2024-08-10 16:53:30.747 [restartedMain] INFO  com.xichen.tourism.BackendApplication - Started TravelApplication in 2.429 seconds (JVM running for 2.752)
 2024-08-10 16:53:33.321 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-08-10 16:53:33.321 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2024-08-10 16:53:33.322 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
