@@ -81,3 +81,20 @@ export const saveSysComments = (params) => post("/comments/saveSysComments",para
 export const editSysComments = (params) => post("/comments/editSysComments",params)
 //删除SysComments
 export const removeSysComments = (params) => get("/comments/removeSysComments",params)
+
+// 获取全部游记列表
+export const getTravelNoteList = () => get("/travelNote/list");
+
+// 根据ID获取游记详情
+export const getTravelNoteById = (id) => get(`/travelNote/${id}`);
+
+// 新增游记
+export const addTravelNote = (params) => post("/travelNote/add", params);
+
+// 编辑游记
+export const updateTravelNote = (params) => post("/travelNote/update", params);
+// 如果你严格遵循RESTful，应该用 put 方法：put("/travelNote/update", params)
+
+// 删除游记
+export const deleteTravelNote = (id) => del(`/travelNote/delete/${id}`);
+

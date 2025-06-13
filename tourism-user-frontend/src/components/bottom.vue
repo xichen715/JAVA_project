@@ -7,7 +7,7 @@
           <span>JoyPath 旅行网</span>
         </div>
         <div class="footer-desc">
-          JoyPath，让旅行更简单。<br>为旅行者提供一站式的景点购票、酒店预订、游记查询与分享、行程规划等服务。
+          JoyPath，让旅行更简单。<br>为旅行者提供一站式的景点购票、酒店预订、攻略查询、行程规划等服务。
         </div>
       </div>
       <div class="footer-links">
@@ -43,7 +43,7 @@ export default {
         { name: "attractions", label: "景点" },
         { name: "hotel", label: "酒店" },
         { name: "forum", label: "游记" },
-        { name: "line", label: "行程规划" },
+        { name: "itinerary", label: "行程规划" },
         { name: "center", label: "个人中心" },
       ]
     }

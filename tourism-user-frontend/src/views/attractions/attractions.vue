@@ -40,7 +40,7 @@ export default {
       search: {
         name: "",
         state: 1,
-        pageSize: 12,
+        pageSize: 5,
         pageNumber: 1,
       },
       total:100,

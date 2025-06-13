@@ -47,7 +47,7 @@ export default {
         name: "",
         state: "1",
         attractions: "",
-        pageSize: 12,
+        pageSize: 5,
         pageNumber: 1,
       },
       total:100,

@@ -4,7 +4,7 @@ import com.xichen.tourism.interceptor.TokenInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * springMvc web配置
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @date: 2024-08-10
  */
 @Configuration
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private TokenInterceptor tokenInterceptor;
@@ -26,5 +26,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 //排除请求
                 .excludePathPatterns("/file/**","/video/**","/img/**","/login","/common/**","/user/setUserAvatar/**"
                         ,"/user/getEmailReg/**","/user/forgetPassword/**","/user/saveUser/**");
+    }
+
+    // ========== 全局CORS跨域配置 ==========
+    @Override
+    public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3001", "http://127.0.0.1:3001")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }
