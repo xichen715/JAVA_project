@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
-    /**
-     * 分页查询用户
-     */
     @Override
     public Page<User> getUserPage(User user) {
         Page<User> page = new Page<>(user.getPageNumber(),user.getPageSize());

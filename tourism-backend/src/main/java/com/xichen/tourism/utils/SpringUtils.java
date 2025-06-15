@@ -9,12 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-/**
- * Spring容器工具
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Component
 public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
 

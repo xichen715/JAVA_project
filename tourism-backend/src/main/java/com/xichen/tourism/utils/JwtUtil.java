@@ -10,12 +10,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
-/**
- * JWT工具类
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 public class JwtUtil {
 
     /**

@@ -13,7 +13,9 @@
     "date-fns": "^4.1.0",
     "echarts": "^5.5.0",
     "element-ui": "^2.15.14",
+    "highlight.js": "^11.11.1",
     "nprogress": "^0.2.0",
+    "quill": "^2.0.3",
     "stream-browserify": "^3.0.0",
     "url-browserify": "^2.0.0",
     "video.js": "^8.6.1",
@@ -28,6 +30,8 @@
     "@vue/cli-service": "^5.0.0",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [

@@ -25,12 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * 用户controller
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 @ResponseBody
 @RequestMapping("/user")

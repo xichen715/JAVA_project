@@ -1,12 +1,5 @@
 package com.xichen.tourism.enums;
 
-
-/**
- * 返回枚举
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 public enum ResultCode {
 
     //通用操作返回码

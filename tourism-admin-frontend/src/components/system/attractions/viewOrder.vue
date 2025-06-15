@@ -29,14 +29,6 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <span class="search-title">
-                图片:
-                </span>
-            <el-form-item prop="images" style="margin-bottom:0">
-                <el-input v-model="form.images" size="mini" placeholder="请输入图片" autocomplete="off"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-            <span class="search-title">
                 人数:
                 </span>
             <el-form-item prop="num" style="margin-bottom:0">

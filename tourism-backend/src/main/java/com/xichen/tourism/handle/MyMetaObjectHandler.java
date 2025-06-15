@@ -12,12 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 
-/**
- * 配置保存时自动插入创建时间和创建账号
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Slf4j
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {

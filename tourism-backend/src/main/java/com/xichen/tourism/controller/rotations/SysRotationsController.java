@@ -13,13 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/**
- * 轮播图controller
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 @ResponseBody
 @RequestMapping("rotations")

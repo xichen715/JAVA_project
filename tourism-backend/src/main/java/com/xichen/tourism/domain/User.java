@@ -11,12 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * 用户表
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor

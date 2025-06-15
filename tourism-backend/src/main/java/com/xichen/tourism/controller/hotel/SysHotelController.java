@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-/**
- * 酒店controller
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 @ResponseBody
 @RequestMapping("hotel")

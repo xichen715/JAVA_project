@@ -1,166 +1,155 @@
 <template>
   <div class="index">
-    <div class="index1" id="index1">
-
-    </div>
-    <div class="index1" id="index2">
-
-    </div>
+    <div class="chart-card" id="index1"></div>
+    <div class="chart-card" id="index2"></div>
   </div>
 </template>
 
 <script>
-  import {getManageData} from '../../../api/api'
-  import * as echarts from "echarts";
-  export default {
-    data() {
-      return{
-        myChart: null,
-        myChart1: null,
-        shuju: {},
-      }
-    },
-    methods: {
-      init() {
-        getManageData().then(res => {
-          if (res.code == 1000) {
-            this.shuju = res.data
-            var chartDom = document.getElementById('index1');
-            this.myChart = echarts.init(chartDom);
-            var option = {
-              title: {
-                text: '近七日景点预约'
-              },
-              tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                  type: 'cross',
-                  label: {
-                    backgroundColor: '#6a7985'
-                  }
-                }
-              },
-              legend: {
-                data: ['预约数']
-              },
-              grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-              },
-              xAxis: [
-                {
-                  type: 'category',
-                  boundaryGap: false,
-                  data: this.shuju.dates
-                }
-              ],
-              yAxis: [
-                {
-                  type: 'value'
-                }
-              ],
-              series: [
-                {
-                  name: '预约数',
-                  type: 'line',
-                  stack: 'Total',
-                  label: {
-                    show: true,
-                    position: 'top'
-                  },
-                  areaStyle: {},
-                  emphasis: {
-                    focus: 'series'
-                  },
-                  data: this.shuju.nums
-                }
-              ]
-            }
-            this.myChart.setOption(option);
+import { getManageData } from '../../../api/api'
+import * as echarts from 'echarts'
 
-            var chartDom1 = document.getElementById('index2');
-            this.myChart1 = echarts.init(chartDom1);
-            var option1 = {
-              title: {
-                text: '近七日酒店预约'
-              },
-              tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                  type: 'cross',
-                  label: {
-                    backgroundColor: '#6a7985'
-                  }
-                }
-              },
-              legend: {
-                data: ['预约数']
-              },
-              grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-              },
-              xAxis: [
-                {
-                  type: 'category',
-                  boundaryGap: false,
-                  data: this.shuju.dates
-                }
-              ],
-              yAxis: [
-                {
-                  type: 'value'
-                }
-              ],
-              series: [
-                {
-                  name: '预约数',
-                  type: 'line',
-                  stack: 'Total',
-                  label: {
-                    show: true,
-                    position: 'top'
-                  },
-                  areaStyle: {},
-                  emphasis: {
-                    focus: 'series'
-                  },
-                  data: this.shuju.orders
-                }
-              ]
-            }
-            this.myChart1.setOption(option1);
-          }
-        })
-      }
-    },
-    created() {
-     
-    },
-    mounted() {
-      this.init()
+export default {
+  data() {
+    return {
+      myChart: null,
+      myChart1: null,
+      shuju: {}
     }
- }
+  },
+  methods: {
+    init() {
+      getManageData().then(res => {
+        if (res.code === 1000) {
+          this.shuju = res.data
+
+          // 景点预约图表
+          const chartDom = document.getElementById('index1')
+          this.myChart = echarts.init(chartDom)
+          this.myChart.setOption({
+            title: {
+              text: '近七日景点预约',
+              left: 'center',
+              textStyle: { fontSize: 18, color: '#333' }
+            },
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                type: 'cross',
+                label: {
+                  backgroundColor: '#6a7985'
+                }
+              }
+            },
+            grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: this.shuju.dates
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '预约数',
+                type: 'line',
+                smooth: true,
+                showSymbol: false,
+                lineStyle: { color: '#3E78F3', width: 2 },
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: '#3E78F3' },
+                    { offset: 1, color: 'rgba(62,120,243,0.1)' }
+                  ])
+                },
+                emphasis: { focus: 'series' },
+                data: this.shuju.nums
+              }
+            ]
+          })
+
+          // 酒店预约图表
+          const chartDom1 = document.getElementById('index2')
+          this.myChart1 = echarts.init(chartDom1)
+          this.myChart1.setOption({
+            title: {
+              text: '近七日酒店预约',
+              left: 'center',
+              textStyle: { fontSize: 18, color: '#333' }
+            },
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                type: 'cross',
+                label: {
+                  backgroundColor: '#6a7985'
+                }
+              }
+            },
+            grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: this.shuju.dates
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '预约数',
+                type: 'line',
+                smooth: true,
+                showSymbol: false,
+                lineStyle: { color: '#67C23A', width: 2 },
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: '#67C23A' },
+                    { offset: 1, color: 'rgba(103,194,58,0.1)' }
+                  ])
+                },
+                emphasis: { focus: 'series' },
+                data: this.shuju.orders
+              }
+            ]
+          })
+        }
+      })
+    }
+  },
+  mounted() {
+    this.init()
+    window.addEventListener('resize', () => {
+      this.myChart && this.myChart.resize()
+      this.myChart1 && this.myChart1.resize()
+    })
+  }
+}
 </script>
 
 <style scoped>
-  .index {
-    width: 100%;
-    height: 100%;
-    font-family: '黑体';
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .index1 {
-    width: 100%;
-    height: 49%;
-    margin-bottom: 1%;
-    background-color: #ffffff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
+.index {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f4f6fa;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.chart-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  height: 400px;
+  width: 100%;
+  transition: box-shadow 0.3s ease;
+}
+.chart-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
 </style>

@@ -22,12 +22,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 登陆
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 @ResponseBody
 @RequestMapping("login")

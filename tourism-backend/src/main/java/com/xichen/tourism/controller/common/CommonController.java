@@ -8,12 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * 通用Controller
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 @ResponseBody
 @RequestMapping("common")

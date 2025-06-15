@@ -9,12 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * 轮播图
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

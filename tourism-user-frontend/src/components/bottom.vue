@@ -42,7 +42,8 @@ export default {
         { name: "index", label: "主页" },
         { name: "attractions", label: "景点" },
         { name: "hotel", label: "酒店" },
-        { name: "forum", label: "游记" },
+        { name: "line", label: "旅行攻略" },
+        { name: "forum", label: "相关资讯" },
         { name: "itinerary", label: "行程规划" },
         { name: "center", label: "个人中心" },
       ]

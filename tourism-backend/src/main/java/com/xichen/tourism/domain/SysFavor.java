@@ -10,12 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 
-/**
- * 收藏
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

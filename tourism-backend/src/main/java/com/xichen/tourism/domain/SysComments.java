@@ -11,12 +11,6 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-/**
- * 评论
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

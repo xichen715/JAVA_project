@@ -41,7 +41,7 @@ export default {
         { name: "line", label: "旅行攻略", path: "/line" },
         { name: "forum", label: "相关资讯", path: "/forum" },
         { name: "myline", label: "行程规划", path: "/itinerary" },
-        { name: "manage", label: "后台管理", path: "/manage" }
+        //{ name: "manage", label: "后台管理", path: "/manage" }
       ]
     };
   },

@@ -9,12 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 基础实体类
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Data
 public class BaseEntity implements Serializable {
 

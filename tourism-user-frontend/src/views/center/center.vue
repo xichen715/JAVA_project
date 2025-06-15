@@ -181,6 +181,24 @@
       </el-card>
     </div>
     <el-dialog
+        title="修改密码"
+        :visible.sync="passwordDialogVisible"
+        width="420px"
+    >
+      <el-form ref="passwordForm" label-width="120px">
+        <el-form-item label="旧密码">
+          <el-input v-model="oldPassword" type="password" placeholder="请输入旧密码" />
+        </el-form-item>
+        <el-form-item label="新密码">
+          <el-input v-model="newPassword" type="password" placeholder="请输入新密码" />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="handlePasswordClose">取消</el-button>
+    <el-button type="primary" @click="passwordSubmit">确认修改</el-button>
+  </span>
+    </el-dialog>
+    <el-dialog
         title="景点预约详情"
         :visible.sync="attractionDialogVisible"
         width="420px"
@@ -403,6 +421,7 @@ export default {
       });
     },
     changePassword() {
+      console.log("修改密码弹窗触发");
       this.passwordDialogVisible = true;
     },
     handleAvatorSuccess(res) {

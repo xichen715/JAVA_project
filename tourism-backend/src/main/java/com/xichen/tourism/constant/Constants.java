@@ -2,12 +2,6 @@ package com.xichen.tourism.constant;
 
 import io.jsonwebtoken.Claims;
 
-/**
- * 常量
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 public class Constants {
 
     /**

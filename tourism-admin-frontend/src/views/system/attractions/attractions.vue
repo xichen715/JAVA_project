@@ -106,13 +106,12 @@
         <add @addFalse="addFalse" :addVisible = "addVisible"></add>
         <update @updateFalse="updateFalse" :updateId = "updateId" :updateVisible = "updateVisible"></update>
     </div>
-  </div>
 </template>
 
 <script>
   import add from '../../../components/system/attractions/addAttractions'
   import update from '../../../components/system/attractions/updateAttractions'
-  import {getSysAttractionsPage,removeSysAttractions,editSysAttractions} from '../../../api/api' 
+  import {getSysAttractionsPage,removeSysAttractions,editSysAttractions} from '../../../api/api'
   export default {
     data() {
       return{
@@ -222,7 +221,7 @@
         }).then(() => {
           this.deleteDate(this.remove.join(","))
         }).catch(() => {
-                 
+
         });
       },
       deleteDate(ids) {

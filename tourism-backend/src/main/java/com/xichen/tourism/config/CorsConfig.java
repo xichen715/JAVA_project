@@ -6,12 +6,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-/**
- * 跨域
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Configuration
 public class CorsConfig {
 

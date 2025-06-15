@@ -33,6 +33,13 @@ export const getSysAttractionsById = (params) => get("/attractions/getSysAttract
 export const getSysLinePage = (params) => post("/line/getSysLinePage",params)
 //根据id查询旅游线路
 export const getSysLineById = (params) => get("/line/getSysLineById",params)
+
+export const saveSysLine = (params) => post("/line/saveSysLine",params)
+//更新旅游线路
+export const editSysLine = (params) => post("/line/editSysLine",params)
+//删除SysLine
+export const removeSysLine = (params) => get("/line/removeSysLine",params)
+
 //查询酒店
 export const getSysHotelPage = (params) => post("/hotel/getSysHotelPage",params)
 //根据id查询酒店

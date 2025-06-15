@@ -6,12 +6,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Token工具类
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 public class TokenUtils {
 
     /**

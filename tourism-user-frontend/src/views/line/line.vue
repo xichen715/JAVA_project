@@ -44,6 +44,7 @@
       />
     </div>
     <bottoms />
+    <add @addFalse="addFalse" :addVisible = "addVisible"></add>
   </div>
 </template>
 
@@ -67,12 +68,15 @@ export default {
   },
   components: {
     headers,
-    bottoms
+    bottoms,
   },
   methods: {
     searchPage() {
       this.search.pageNumber = 1
       this.getSysLinePage()
+    },
+    addFalse() {
+      this.query()
     },
     getSysLinePage() {
       getSysLinePage(this.search).then(res => {
@@ -86,7 +90,6 @@ export default {
       })
     },
     toInfo(id) {
-      // 可用于调试：console.log('跳转到线路详情', id)
       this.$router.push("/lineInfo?id=" + id)
     },
     handleCurrentChange(val) {

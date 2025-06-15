@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- * token令牌拦截器
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
 

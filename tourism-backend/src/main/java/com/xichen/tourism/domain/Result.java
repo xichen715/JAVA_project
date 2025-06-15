@@ -6,12 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * 统一返回类型
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Slf4j
 @Data
 @NoArgsConstructor

@@ -11,13 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-/**
- * 景点
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

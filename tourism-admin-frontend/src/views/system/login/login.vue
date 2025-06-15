@@ -1,148 +1,176 @@
 <template>
-  <div class="login">
-    <div class="login1">
-    </div>
-    <div class="login4">
-        <div class="login5">
-          <img src="../../../assets/image/logo.png" style="width: 50px;position: relative; top: 13px;right: 6px">
-            <div class="login6">欢迎使用旅游信息推荐系统</div>
-            <div class="login3">
-                珍藏每一刻的美好，旅行让生活变得更加有意义！
-            </div>
-            <el-input prefix-icon="el-icon-user" v-model="loginAccount" placeholder="请输入登录账号"></el-input>
-            <el-input prefix-icon="el-icon-star-off" type="password" v-model="password" placeholder="请输入用户密码"></el-input>
-            <div class="login8" @click="login">
-                登 录
-            </div>
+  <div class="login-container">
+    <div class="login-left"></div>
+
+    <div class="login-right">
+      <div class="login-box">
+        <div class="login-header">
+          <img src="@/assets/image/logo.png" alt="logo" class="logo" />
+          <h2 class="brand">Joypath乐途</h2>
         </div>
+
+        <p class="slogan">旅行让生活变得更加有意义！</p>
+
+        <el-input
+            prefix-icon="el-icon-user"
+            v-model="loginAccount"
+            placeholder="请输入登录账号"
+            class="login-input"
+        ></el-input>
+
+        <el-input
+            prefix-icon="el-icon-lock"
+            type="password"
+            v-model="password"
+            placeholder="请输入用户密码"
+            class="login-input"
+        ></el-input>
+
+        <el-button
+            type="primary"
+            class="login-button"
+            round
+            @click="login"
+            :loading="loading"
+        >
+          登 录
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import {login,getUser} from '../../../api/api'
-  export default {
-    data() {
-      return{
-        loginAccount: '',
-        password: ''
-      }
-    },
-    methods: {
-        login() {
-            if(!this.loginAccount) {
-                this.$message({
-                    message: '请输入用户名',
-                    type: 'warning'
-                });
-                return;
-            }
-            if(!this.password) {
-                this.$message({
-                    message: '请输入密码',
-                    type: 'warning'
-                });
-                return;
-            }
-            var params = {
-                loginAccount: this.loginAccount,
-                password: this.password
-            }
-            login(params).then(res => {
-                if(res.code == 1000) {
-                    this.$message({
-                        message: '登陆成功',
-                        type: 'success'
-                    });
-                    var that = this
-                    var token = res.data.token
-                    this.$store.commit('user/setToken', token)
-                    this.getUserInfo()
-                    setTimeout(function() {
-                        that.$router.push("/index")
-                    },500)
-                } else {
-                    this.$message.error(res.message);
-                }
-            })
-        },
-        getUserInfo() {
-            getUser().then(res => {
-                if(res.code == 1000) {
-                    this.$store.commit('user/setUser', JSON.stringify(res.data))
-                }
-            })
-        },
-    },
-    created() {
+import { login, getUser } from '../../../api/api'
 
-    },
-    mounted() {
-
+export default {
+  data() {
+    return {
+      loginAccount: '',
+      password: '',
+      loading: false
     }
- }
+  },
+  methods: {
+    login() {
+      if (!this.loginAccount) {
+        this.$message.warning('请输入用户名');
+        return;
+      }
+      if (!this.password) {
+        this.$message.warning('请输入密码');
+        return;
+      }
+
+      this.loading = true;
+      const params = {
+        loginAccount: this.loginAccount,
+        password: this.password
+      };
+
+      login(params).then(res => {
+        this.loading = false;
+        if (res.code === 1000) {
+          this.$message.success('登录成功');
+          this.$store.commit('user/setToken', res.data.token);
+          this.getUserInfo();
+          setTimeout(() => {
+            this.$router.push('/index');
+          }, 500);
+        } else {
+          this.$message.error(res.message || '登录失败');
+        }
+      }).catch(() => {
+        this.loading = false;
+        this.$message.error('网络错误，请稍后重试');
+      });
+    },
+    getUserInfo() {
+      getUser().then(res => {
+        if (res.code === 1000) {
+          this.$store.commit('user/setUser', JSON.stringify(res.data));
+        }
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
-.login {
-    width: 100%;
-    height: 100%;
-    font-family: '黑体';
-    display: flex;
+:root {
+  --primary-color: #3E78F3;
+  --bg-color: #f5f7fa;
+  --font-color: #333;
 }
-.login1 {
-    width: 60%;
-    height: 100%;
-    background-image: url('../../../assets/image/image 2.png');
-    background-size: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Helvetica Neue', '黑体', sans-serif;
+  background-color: var(--bg-color);
 }
-.login2 {
-    font-size: 35px;
-    font-weight: bold;
+
+.login-left {
+  flex: 3;
+  background: url('../../../assets/image/image 2.png') no-repeat center center;
+  background-size: cover;
 }
-.login3 {
-    margin-top: 10px;
-    letter-spacing: 2px;
-    font-size: 20px;
-    font-weight: bold;
+
+.login-right {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
 }
-.login4 {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.login-box {
+  width: 80%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.login5 {
-    width: 80%;
-    height: 80%;
-    flex-direction: column;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+
+.login-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
-.login6 {
-    font-size: 30px;
-    font-weight: bold;
+
+.logo {
+  width: 50px;
+  margin-right: 10px;
 }
-.login7 {
-    width: 100%;
-    text-align: right;
-    cursor: pointer;
+
+.brand {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--font-color);
 }
-.login8 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    width: 70%;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 20px;
-    background-color: #3E78F3;
+
+.slogan {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.login-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-button {
+  width: 100%;
+  height: 45px;
+  font-size: 16px;
+  border-color: var(--primary-color);
+}
+
+.login-button:hover {
+  background-color: #2e66dc;
+  border-color: #2e66dc;
 }
 </style>

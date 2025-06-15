@@ -10,17 +10,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * 推荐算法
- *
- * @author: ShanZhu
- * @date: 2024-07-25
- */
+
 public class CoreMath {
 
-    /**
-     * 推荐计算
-     */
+    
     public List<String> recommend(String userId, List<RelateDTO> list) {
         //找到最近邻用户id
         Map<Double, String> distances = computeNearestNeighbor(userId, list);

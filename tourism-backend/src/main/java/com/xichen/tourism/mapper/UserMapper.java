@@ -7,9 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    /**
-    * 分页查询用户
-    */
     Page<User> getUserPage(Page<User> page, @Param("ew") User apeUser);
 
 }

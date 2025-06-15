@@ -5,12 +5,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 
-/**
- * 密码工具类
- *
- * @author: ShanZhu
- * @date: 2023-11-10
- */
 public class PasswordUtils {
 
     /**

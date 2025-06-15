@@ -85,22 +85,6 @@ const routes = [
     name: 'forumInfo',
     component: forumInfo,
   },
-  // 游记相关
-  {
-    path: '/travelNote',
-    name: 'travelNote',
-    component: () => import('@/views/travelNote/travelNoteList.vue'),
-  },
-  {
-    path: '/travelNote/detail/:id',
-    name: 'travelNoteDetail',
-    component: () => import('@/views/travelNote/travelNoteDetail.vue'),
-  },
-  {
-    path: '/travelNote/edit/:id?',
-    name: 'travelNoteEdit',
-    component: () => import('@/views/travelNote/travelNoteEdit.vue'),
-  },
   {
     path: '/lineInfo',
     name: 'lineInfo',

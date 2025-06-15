@@ -7,18 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
 
-/**
- * MybatisPlus配置类
- *
- * @author: ShanZhu
- * @date: 2024-08-10
- */
 @Controller
 public class MybatisPlusConfig {
-
-    /**
-     * 分页插件（官网最新）
-     */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();

@@ -4,20 +4,39 @@
       <el-asside></el-asside>
       <el-container>
         <el-header></el-header>
+
+        <!-- 标签页导航栏 -->
         <div class="main-menu">
-          <div class="scroll-left" @click="leftScroll()">
+          <div class="scroll-left" @click="leftScroll">
             <i class="el-icon-arrow-left"></i>
           </div>
+
           <div class="menu" id="menu">
-            <div class="menu-item" v-for="(item,index) in activeMenuArrary" :key="index" @click="openMenu(item.url)">
-              <span :class="item.url == activeMenu?'active':''" class="menu-name">{{item.name}}</span>
-              <i v-if="item.url != '/index'" class="menu-icon el-icon-close" @click.stop="closeMenu(item.url)"></i>
+            <div
+                class="menu-item"
+                v-for="(item, index) in activeMenuArrary"
+                :key="index"
+                @click="openMenu(item.url)"
+            >
+              <span
+                  class="menu-name"
+                  :class="{ active: item.url === activeMenu }"
+              >
+                {{ item.name }}
+              </span>
+              <i
+                  v-if="item.url !== '/index'"
+                  class="menu-icon el-icon-close"
+                  @click.stop="closeMenu(item.url)"
+              ></i>
             </div>
           </div>
-          <div class="scroll-right" @click="rightScroll()">
+
+          <div class="scroll-right" @click="rightScroll">
             <i class="el-icon-arrow-right"></i>
           </div>
         </div>
+
         <el-main></el-main>
       </el-container>
     </el-container>
@@ -25,163 +44,138 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import { verPassword } from '@/api/api'
-  import elAsside from "../../components/layout/aside"
-  import elMain from "../../components/layout/main"
-  import elHeader from "../../components/layout/header"
+import { mapState } from 'vuex'
+import elAsside from '@/components/layout/aside'
+import elMain from '@/components/layout/main'
+import elHeader from '@/components/layout/header'
 
-  export default {
-    name: "index",
-    data() {
-      return{
-        pass: "",
+export default {
+  name: 'index',
+  components: {
+    elAsside,
+    elMain,
+    elHeader
+  },
+  computed: {
+    ...mapState({
+      activeMenuArrary: state => state.menu.activeMenuArrary,
+      activeMenu: state => state.menu.activeMenu
+    })
+  },
+  methods: {
+    leftScroll() {
+      const container = document.getElementById('menu')
+      container.scrollLeft -= 100
+    },
+    rightScroll() {
+      const container = document.getElementById('menu')
+      container.scrollLeft += 100
+    },
+    openMenu(url) {
+      if (this.activeMenu !== url) {
+        this.$router.push({ path: url })
+        this.$store.commit('menu/setActiveMenu', url)
       }
     },
-    components:{
-      elAsside,
-      elMain,
-      elHeader
-    },
-    computed: {
-      ...mapState({
-          activeMenuArrary: state => state.menu.activeMenuArrary,
-          activeMenu: state => state.menu.activeMenu
-      })
-    },
-    methods: {
-      leftScroll() {
-        var container = document.getElementById('menu');
-        // 向左滚动100像素
-        container.scrollLeft -= 100;
-      },
-      rightScroll() {
-        var container = document.getElementById('menu');
-        // 向右滚动100像素
-        container.scrollLeft += 100;
-      },
-      openMenu(url) {
-        if (this.activeMenu != url) {
-          this.$router.push({
-            path: url,
-          })
-          this.$store.commit('menu/setActiveMenu', url)
-        }
-      },
-      closeMenu(url) {
-        var index = this.activeMenuArrary.length - 1
-        for(let i = 0;i < this.activeMenuArrary.length;i++) {
-          if(this.activeMenuArrary[i].url == url) {
-            index = i;
-            break;
-          }
-        }
-        if(this.activeMenu == url) {
-          this.$router.push({
-            path: this.activeMenuArrary[index-1].url,
-          })
-          this.$store.commit('menu/setActiveMenu', this.activeMenuArrary[index-1].url)
-        }
-        this.$store.commit('menu/reduceActiveMenu', index)
-        this.$bus.$emit("clearKeepAlive", url);
-      },
-    },
-    created() {
-     
-    },
-    mounted() {
-      // console.clear()
+    closeMenu(url) {
+      const index = this.activeMenuArrary.findIndex(item => item.url === url)
+
+      if (this.activeMenu === url && index > 0) {
+        const prevUrl = this.activeMenuArrary[index - 1].url
+        this.$router.push({ path: prevUrl })
+        this.$store.commit('menu/setActiveMenu', prevUrl)
+      }
+
+      this.$store.commit('menu/reduceActiveMenu', index)
+      this.$bus.$emit('clearKeepAlive', url)
     }
- }
+  }
+}
 </script>
 
-<style  scoped>
-    .common-layout >>> .el-menu-item {
-        min-width: 0;
-    }
-    .main-menu {
-      width: 100%;
-      height: 25px;
-      border-top: 1px solid #ECECF1;
-      background-color: #ffffff;
-      display: flex;
-      flex-direction: row;
-    }
-    .menu {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      height: 100%;
-      width: calc(100% - 60px);
-      overflow: scroll;
-      flex-grow: 0;
-      flex-basis: auto
-    }
-    .scroll-left {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 100%;
-      cursor: pointer;
-    }
-    .menu::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-    }
-    .scroll-right {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 100%;
-      cursor: pointer;
-    }
-    .menu-item {
-      width: 100px;
-      height: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      border-left: 1px solid #E5E5E5;
-      border-right: 1px solid #E5E5E5;
-      border-bottom: 1px solid #E5E5E5;
-      cursor: pointer;
-      background-color: #F5F7FA;
-      flex-shrink: 0;
-    }
-    .menu-name {
-      margin-left:10px;
-      font-size: 12px;
-      cursor: pointer;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-family: '黑体';
-    }
-    .active {
-      color: #66B1FF;
-    }
-    .menu-icon {
-      cursor: pointer;
-      font-size: 12px;
-    }
-    .form {
-      z-index: 999;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .content {
-      display: flex;
-      align-items: center;
-      color: black;
-      font-size: 20px;
-      cursor: pointer;
-    }
+<style scoped>
+.common-layout >>> .el-menu-item {
+  min-width: 0;
+}
+
+.main-menu {
+  width: 100%;
+  height: 40px;
+  border-top: 1px solid #ececf1;
+  background-color: #f9f9fb;
+  display: flex;
+  align-items: center;
+  font-family: "Helvetica Neue", "黑体", sans-serif;
+  box-shadow: inset 0 -1px 0 #e0e0e0;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 60px);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-left,
+.scroll-right {
+  width: 30px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #999;
+  transition: background-color 0.2s;
+}
+.scroll-left:hover,
+.scroll-right:hover {
+  background-color: #eaeaea;
+  color: #333;
+}
+
+.menu-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-right: 1px solid #e0e0e0;
+  background-color: #f5f7fa;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+  max-width: 160px;
+}
+.menu-item:hover {
+  background-color: #e8f0fe;
+}
+
+.menu-name {
+  font-size: 13px;
+  color: #444;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.menu-name.active {
+  color: #3e78f3;
+  font-weight: bold;
+  border-bottom: 2px solid #3e78f3;
+  padding-bottom: 2px;
+}
+
+.menu-icon {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #999;
+  transition: color 0.2s;
+}
+.menu-icon:hover {
+  color: #f56c6c;
+}
 </style>
